@@ -25,3 +25,11 @@ jobs:
           type: 'zip'
           filename: Duplicates_Detector-${{github.ref_name}}-windows.zip
           directory: build/windows/runner/Release
+      
+      - name: Windows Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: build/windows/runner/Release/Duplicates_Detector-${{github.ref_name}}-windows.zip
